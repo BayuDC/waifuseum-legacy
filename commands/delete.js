@@ -14,6 +14,7 @@ module.exports = {
         await channel.delete();
 
         await Category.deleteOne(category);
+        message.client.waifuseum.delete(name);
 
         await message.channel.send(`Category **${name}** successfully deleted`);
     },

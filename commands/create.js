@@ -14,6 +14,7 @@ module.exports = {
         await channel.setParent(message.channel.parent);
 
         await Category.create({ name, channelId: channel.id });
+        message.client.waifuseum.set(name, channel.id);
 
         await message.channel.send(`Category **${name}** successfully created`);
     },
