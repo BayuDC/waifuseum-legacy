@@ -25,7 +25,6 @@ client.on('messageCreate', async message => {
 
     try {
         await client.commands.get(command).execute(message, ...args);
-        console.log(client.waifuseum);
     } catch (error) {
         await message.channel.send('Something went wrong');
         console.log(error);
@@ -37,7 +36,6 @@ client.once('ready', async () => {
     (await Category.find()).forEach(async category => {
         client.waifuseum.set(category.name, await client.channels.fetch(category.channelId));
     });
-    console.log(client.waifuseum);
 });
 
 client.login(token);
