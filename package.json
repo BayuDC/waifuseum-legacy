@@ -1,0 +1,24 @@
+{
+  "name": "waifuseum",
+  "version": "1.0.0",
+  "description": "A simple REST API for storing and managing my waifu picture collection",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r dotenv/config index"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BayuDC/waifuseum.git"
+  },
+  "author": "BayuDC <dev.bayudc@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.8"
+  }
+}
