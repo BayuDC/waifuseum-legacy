@@ -19,6 +19,7 @@
     "discord.js": "^13.6.0",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
-    "mongoose": "^6.1.8"
+    "mongoose": "^6.1.8",
+    "multer": "^1.4.4"
   }
 }

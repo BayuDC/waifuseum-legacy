@@ -1,7 +1,12 @@
 const express = require('express');
+const uploadImg = require('../middlewares/upload-img');
 
 const app = express();
 const port = process.env.PORT ?? 8080;
+
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(uploadImg());
 
 app.use(require('../routes/main'));
 
