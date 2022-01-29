@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-['ping', 'create'].forEach(file => {
+['ping', 'create', 'delete'].forEach(file => {
     const command = require(`../commands/${file}.js`);
     client.commands.set(command.name, command);
 });

@@ -7,7 +7,7 @@ module.exports = {
 
         const category = await Category.findOne({ name });
         if (category) {
-            return await message.channel.send(`Category **${name}** already exists.`);
+            return await message.channel.send(`Category **${name}** already exists`);
         }
 
         const channel = await message.guild.channels.create(name);
@@ -15,6 +15,6 @@ module.exports = {
 
         await Category.create({ name, channelId: channel.id });
 
-        await message.channel.send(`Category **${name}** successfully created.`);
+        await message.channel.send(`Category **${name}** successfully created`);
     },
 };
