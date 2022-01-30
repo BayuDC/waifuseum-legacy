@@ -10,9 +10,9 @@ router.post('/:category?', uploadImg(), sanitizeData(), async (req, res, next) =
     if (!waifuseum) return next(new HttpError(404, 'Category not found'));
     if (!data.file) return next(new HttpError(418, 'Picture file is required'));
 
-    const picture = await waifuseum.create(data);
+    const { err, picture } = await waifuseum.create(data);
 
-    data.file.destroy();
+    if (err) return next(err);
     res.status(201).json({ picture });
 });
 router.put('/', (req, res) => {});
