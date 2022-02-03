@@ -12,6 +12,7 @@ app.use(cookieParser());
 
 app.use(getUser());
 app.use(require('../routes/auth'));
+app.use(require('../routes/user'));
 app.use(require('../routes/main'));
 app.use(handleError());
 
