@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const uploadImg = require('../middlewares/upload-img');
 const sanitizeData = require('../middlewares/sanitize-data');
+const needPermission = require('../middlewares/need-permission');
 const HttpError = require('../lib/http-error');
 
 router.get('/:category', sanitizeData(), async (req, res, next) => {
@@ -14,7 +15,8 @@ router.get('/:category', sanitizeData(), async (req, res, next) => {
     if (!picture) return next(new HttpError(404, 'No picture found'));
     res.send({ picture });
 });
-router.post('/:category?', uploadImg(), sanitizeData(), async (req, res, next) => {
+
+router.post('/:category?', needPermission('manageContent'), uploadImg(), sanitizeData(), async (req, res, next) => {
     const { waifuseum, data } = res.locals;
 
     if (!waifuseum) return next(new HttpError(404, 'Category not found'));
@@ -25,7 +27,7 @@ router.post('/:category?', uploadImg(), sanitizeData(), async (req, res, next) =
     if (err) return next(err);
     res.status(201).json({ picture });
 });
-router.put('/:id?', uploadImg(), sanitizeData(), async (req, res, next) => {
+router.put('/:id?', needPermission('manageContent'), uploadImg(), sanitizeData(), async (req, res, next) => {
     const { picture: pictureOld, waifuseum, data } = res.locals;
 
     if (!pictureOld) return next(new HttpError(404, 'Picture not found'));
@@ -38,7 +40,7 @@ router.put('/:id?', uploadImg(), sanitizeData(), async (req, res, next) => {
     if (err) return next(err);
     res.status(200).json({ picture });
 });
-router.delete('/:id?', sanitizeData(), async (req, res, next) => {
+router.delete('/:id?', needPermission('manageContent'), sanitizeData(), async (req, res, next) => {
     const { picture, waifuseum } = res.locals;
 
     if (!picture) return next(new HttpError(404, 'Picture not found'));
