@@ -4,15 +4,15 @@ const Picture = require('../models/picture');
 module.exports = () => {
     return [
         (req, res, next) => {
-            const category = req.params.category ?? req.query.category ?? req.body.category;
-            const sauce = req.query.sauce ?? req.body.sauce;
+            const category = req.params.category ?? req.body.category;
+            const sauce = req.body.sauce;
             const file = req.file;
 
             res.locals.data = { category, sauce, file };
             next();
         },
         async (req, res, next) => {
-            const id = req.params.id ?? req.query.id ?? req.body.id;
+            const id = req.params.id ?? req.body.id;
             const picture = await Picture.findById(id);
 
             res.locals.picture = picture;

@@ -3,7 +3,17 @@ const uploadImg = require('../middlewares/upload-img');
 const sanitizeData = require('../middlewares/sanitize-data');
 const HttpError = require('../lib/http-error');
 
-router.get('/', (req, res) => {});
+router.get('/:category', sanitizeData(), async (req, res, next) => {
+    const waifuseum = res.locals.waifuseum;
+    const quantity = parseInt(req.query.q);
+
+    if (!waifuseum) return next(new HttpError(404, 'Category not found'));
+
+    const picture = await waifuseum.find(quantity);
+
+    if (!picture) return next(new HttpError(404, 'No picture found'));
+    res.send({ picture });
+});
 router.post('/:category?', uploadImg(), sanitizeData(), async (req, res, next) => {
     const { waifuseum, data } = res.locals;
 
