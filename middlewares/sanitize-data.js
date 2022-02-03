@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Waifuseum = require('../lib/waifuseum');
 const Picture = require('../models/picture');
 
@@ -13,6 +14,8 @@ module.exports = () => {
         },
         async (req, res, next) => {
             const id = req.params.id ?? req.body.id;
+            if (!mongoose.isValidObjectId(id)) id = undefined;
+
             const picture = await Picture.findById(id);
 
             res.locals.picture = picture;
