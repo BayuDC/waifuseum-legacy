@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports = mongoose.model('Pictures', {
+module.exports = mongoose.model('Picture', {
     url: String,
     sauce: String,
     category: String,
