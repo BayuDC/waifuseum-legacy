@@ -28,6 +28,15 @@ router.put('/:id?', uploadImg(), sanitizeData(), async (req, res, next) => {
     if (err) return next(err);
     res.status(200).json({ picture });
 });
-router.delete('/', (req, res) => {});
+router.delete('/:id?', sanitizeData(), async (req, res, next) => {
+    const { picture, waifuseum } = res.locals;
+
+    if (!picture) return next(new HttpError(404, 'Picture not found'));
+
+    const err = await waifuseum.delete(picture);
+
+    if (err) return next(err);
+    res.sendStatus(204);
+});
 
 module.exports = router;
