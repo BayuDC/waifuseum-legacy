@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const User = require('../models/user');
+const HttpError = require('../lib/http-error');
 const needPermission = require('../middlewares/need-permission');
 const sanitizeUser = require('../middlewares/sanitize-user');
 
-router.all('/user', needPermission('manageUser'), sanitizeUser());
+router.all('/user/:id?', needPermission('manageUser'), sanitizeUser());
 
 router.post('/user', async (req, res) => {
     const { data } = res.locals;
@@ -19,7 +20,28 @@ router.post('/user', async (req, res) => {
         },
     });
 });
-router.put('/user', async (req, res) => {});
-router.delete('/user', async (req, res) => {});
+router.put('/user/:id?', async (req, res, next) => {
+    const { userId, data } = res.locals;
+
+    const user = await User.findByIdAndUpdate(userId, data, { new: true });
+    if (!user) return next(new HttpError(404, 'User not found'));
+
+    res.status(200).json({
+        user: {
+            id: user._id,
+            username: user.username,
+            manageUser: user.manageUser,
+            manageContent: user.manageContent,
+        },
+    });
+});
+router.delete('/user/:id?', async (req, res, next) => {
+    const { userId } = res.locals;
+
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) return next(new HttpError(404, 'User not found'));
+
+    res.status(204).send();
+});
 
 module.exports = router;
