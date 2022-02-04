@@ -6,8 +6,14 @@ const sanitizeUser = require('../middlewares/sanitize-user');
 
 router.all('/user/:id?', needPermission('manageUser'), sanitizeUser());
 
-router.post('/user', async (req, res) => {
+router.post('/user', async (req, res, next) => {
     const { data } = res.locals;
+
+    if (!data.username) return next(new HttpError(400, 'Username is required'));
+    if (!data.password) return next(new HttpError(400, 'Password is required'));
+    if (data.password?.length < 8) {
+        return next(new HttpError(400, 'Minimum password length is 8 characters'));
+    }
 
     const user = await User.create(data);
 
@@ -22,6 +28,10 @@ router.post('/user', async (req, res) => {
 });
 router.put('/user/:id?', async (req, res, next) => {
     const { userId, data } = res.locals;
+
+    if (data.password?.length < 8) {
+        return next(new HttpError(400, 'Minimum password length is 8 characters'));
+    }
 
     const user = await User.findByIdAndUpdate(userId, data, { new: true });
     if (!user) return next(new HttpError(404, 'User not found'));
