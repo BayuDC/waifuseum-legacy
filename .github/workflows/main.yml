@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'waifuseum'
+          heroku_email: 'dev.bayudc@gmail.com'
+          buildpack: https://github.com/heroku/heroku-buildpack-nodejs.git
+        env:
+          HD_MONGO_URI: ${{secrets.MONGO_URI}}
+          HD_BOT_TOKEN: ${{secrets.BOT_TOKEN}}
+          HD_BOT_PREFIX: ${{secrets.BOT_PREFIX}}
+          HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
