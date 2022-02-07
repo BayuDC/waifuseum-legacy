@@ -4,7 +4,7 @@ const sanitizeData = require('../middlewares/sanitize-data');
 const needPermission = require('../middlewares/need-permission');
 const HttpError = require('../lib/http-error');
 
-router.get('/:category', sanitizeData(), async (req, res, next) => {
+router.get('/museum/:category?', sanitizeData(), async (req, res, next) => {
     const waifuseum = res.locals.waifuseum;
     const quantity = parseInt(req.query.q);
 
@@ -16,7 +16,7 @@ router.get('/:category', sanitizeData(), async (req, res, next) => {
     res.send({ picture });
 });
 
-router.post('/:category?', needPermission('manageContent'), uploadImg(), sanitizeData(), async (req, res, next) => {
+router.post('/museum/:category?', needPermission('manageContent'), uploadImg(), sanitizeData(), async (req, res, next) => {
     const { waifuseum, data } = res.locals;
 
     if (!waifuseum) return next(new HttpError(404, 'Category not found'));
@@ -27,7 +27,7 @@ router.post('/:category?', needPermission('manageContent'), uploadImg(), sanitiz
     if (err) return next(err);
     res.status(201).json({ picture });
 });
-router.put('/:id?', needPermission('manageContent'), uploadImg(), sanitizeData(), async (req, res, next) => {
+router.put('/museum/:id?', needPermission('manageContent'), uploadImg(), sanitizeData(), async (req, res, next) => {
     const { picture: pictureOld, waifuseum, data } = res.locals;
 
     if (!pictureOld) return next(new HttpError(404, 'Picture not found'));
@@ -40,7 +40,7 @@ router.put('/:id?', needPermission('manageContent'), uploadImg(), sanitizeData()
     if (err) return next(err);
     res.status(200).json({ picture });
 });
-router.delete('/:id?', needPermission('manageContent'), sanitizeData(), async (req, res, next) => {
+router.delete('/museum/:id?', needPermission('manageContent'), sanitizeData(), async (req, res, next) => {
     const { picture, waifuseum } = res.locals;
 
     if (!picture) return next(new HttpError(404, 'Picture not found'));
