@@ -6,11 +6,11 @@ const HttpError = require('../lib/http-error');
 
 router.get('/museum/:category?', sanitizeData(), async (req, res, next) => {
     const waifuseum = res.locals.waifuseum;
-    const quantity = parseInt(req.query.q);
+    const count = parseInt(req.query.n);
 
     if (!waifuseum) return next(new HttpError(404, 'Category not found'));
 
-    const picture = await waifuseum.find(quantity);
+    const picture = await waifuseum.find(count);
 
     if (!picture) return next(new HttpError(404, 'No picture found'));
     res.send({ picture });
