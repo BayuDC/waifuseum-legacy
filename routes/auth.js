@@ -7,7 +7,7 @@ const HttpError = require('../lib/http-error');
 const secret = process.env.JWT_SECRET;
 const maxAge = 24 * 60 * 60;
 
-router.post('/login', async (req, res, next) => {
+router.post('/auth/login', async (req, res, next) => {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
@@ -22,7 +22,7 @@ router.post('/login', async (req, res, next) => {
     res.json({ userId: user._id });
 });
 
-router.delete('/logout', (req, res) => {
+router.delete('/auth/logout', (req, res) => {
     res.clearCookie('token');
     res.sendStatus(204);
 });
