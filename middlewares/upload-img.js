@@ -9,13 +9,16 @@ const imgSize = 8 * 1024 * 1024;
 const imgFormats = { 'image/jpeg': 'jpg', 'image/png': 'png' };
 
 const downloadImg = url => {
+    const config = { responseType: 'stream' };
+    if (url.match(/https?:\/\/i\.pximg\.net/g)) {
+        config.headers = { Referer: 'https://pixiv.net' };
+    }
+
     return new Promise((resolve, reject) => {
         axios
-            .get(url, { responseType: 'stream' })
+            .head(url, config)
             .then(res => {
                 const file = {
-                    name: randomBytes(16).toString('hex'),
-                    path: './temp/' + this.name,
                     type: res.headers['content-type'],
                     size: res.headers['content-length'],
                 };
@@ -23,14 +26,22 @@ const downloadImg = url => {
                 if (!imgFormats[file.type]) throw { code: 'NOT_AN_IMAGE' };
                 if (file.size > imgSize) throw { code: 'LIMIT_FILE_SIZE' };
 
-                res.data.pipe(createWriteStream(file.path));
-                res.data.on('end', () => {
-                    resolve({
-                        path: file.path,
-                        filename: file.name,
-                        mimetype: file.type,
-                    });
-                });
+                axios
+                    .get(url, config)
+                    .then(res => {
+                        file.name = randomBytes(16).toString('hex');
+                        file.path = './temp/' + file.name;
+
+                        res.data.pipe(createWriteStream(file.path));
+                        res.data.on('end', () => {
+                            resolve({
+                                path: file.path,
+                                filename: file.name,
+                                mimetype: file.type,
+                            });
+                        });
+                    })
+                    .catch(reject);
             })
             .catch(reject);
     });
