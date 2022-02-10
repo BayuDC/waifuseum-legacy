@@ -9,4 +9,5 @@ module.exports = mongoose.model('Category', {
         type: String,
         unique: true,
     },
+    parent: String,
 });

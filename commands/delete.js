@@ -6,8 +6,13 @@ module.exports = {
         if (!name) return await message.channel.send("**I'm a teapot**");
 
         const category = await Category.findOne({ name });
+        const childCategories = await Category.find({ parent: name });
+
         if (!category) {
             return await message.channel.send(`Category **${name}** not found`);
+        }
+        if (childCategories.length > 0) {
+            return message.channel.send(`Can't delete parent category`);
         }
 
         const channel = await message.client.channels.fetch(category.channelId);
