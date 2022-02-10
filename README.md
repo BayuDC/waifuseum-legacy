@@ -20,22 +20,22 @@ Base url: https://waifuseum.herokuapp.com
 
 ##### Example:
 
--   Get a picture from category **waifu**
-    `GET /museum/waifu`
+-   Get a picture from category **waifu**  
+    `GET /museum/waifu`  
     `GET /museum { category: 'waifu' }`
--   Get **10** pictures from category **waifu**
+-   Get **10** pictures from category **waifu**  
     `GET /museum/waifu?n=10`
--   Upload **waifu.jpg** and add it to database
-    `POST /museum/waifu { picture: (file: waifu.jpg) }`
+-   Upload **waifu.jpg** and add it to database  
+    `POST /museum/waifu { picture: (file: waifu.jpg) }`  
     `POST /museum { category: 'waifu', picture: (file: waifu.jpg) }`
--   Add picture with optional sauce/source
+-   Add picture with optional sauce/source  
     `POST /museum/waifu { picture: (file: waifu.jpg), sauce: 'https://sauce.pic' }`
--   Add picture from an url to database
+-   Add picture from an url to database  
     `POST /museum/waifu { picture: 'https://picture.url/waifu.png' }`
--   Update data of a picture with id **6204f85b424db4752b5b81e9**
-    `PUT /museum/6204f85b424db4752b5b81e9 { picture: (file: waifu.jpg) }`
-    `PUT /museum/6204f85b424db4752b5b81e9 { category: 'waifu', sauce: 'https://sauce.new' }`
+-   Update data of a picture with id **6204f85b424db4752b5b81e9**  
+    `PUT /museum/6204f85b424db4752b5b81e9 { picture: (file: waifu.jpg) }`  
+    `PUT /museum/6204f85b424db4752b5b81e9 { category: 'waifu', sauce: 'https://sauce.new' }`  
     `PUT /museum { id: '6204f85b424db4752b5b81e9', sauce: 'https://sauce.new' }`
--   Delete a picture with id **6204f85b424db4752b5b81e9**
-    `DELETE /museum/6204f85b424db4752b5b81e9`
+-   Delete a picture with id **6204f85b424db4752b5b81e9**  
+    `DELETE /museum/6204f85b424db4752b5b81e9`  
     `DELETE /museum/ { id: '6204f85b424db4752b5b81e9' }`
