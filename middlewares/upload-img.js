@@ -47,7 +47,7 @@ const downloadImg = url => {
     });
 };
 const handleErr = (err, next) => {
-    if (err.code == 'LIMIT_FILE_SIZE') return next(new HttpError(413, err.message));
+    if (err.code == 'LIMIT_FILE_SIZE') return next(new HttpError(413, 'File too large'));
     if (err.code == 'NOT_AN_IMAGE') return next(new HttpError(415, 'File is not an image'));
     next(new HttpError(422, 'Unprocessable file'));
 };
