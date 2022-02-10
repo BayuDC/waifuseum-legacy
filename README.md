@@ -1,6 +1,26 @@
 # Waifuseum
 
-Waifuseum (Museum Waifu) is a simple REST API for storing and managing my waifu picture collection on a Discord server
+Waifuseum (Museum Waifu) is a simple REST API for storing and managing anime picture collection.
+This project use combinaton of ExpressJS, Discord.js, and MongoDB. This uses Discord server as a
+place to store picture file and MongoDB to save the picture url. When we upload a file to discord
+server, we can right click the message and get the file url, then we can save the file url in a
+database, and yeah **free cloud storage to store picture file**. So, I made this project to
+automate it. Btw, this project is inspired by [Waifu.pics](https://github.com/Waifu-pics/waifu-api)
+and [Nekos.life](https://github.com/Nekos-life/nekos-dot-life).
+
+#### How it works:
+
+1. User upload the picture file to the API (Express App)
+2. The API send the file to Discord server via discord bot (Discord.js)
+3. The API save the url(obtained from discord bot) to database (MongoDB)
+
+The main drawback of this API is the file size limitation. Due to Discord rules, This API can't
+save files with size more than 8 mb. _Server Boost_ is needed to increase the maximum file size
+limit.
+
+Anyone can get images from this API. But add, update, and delete picture are only available to
+authenticated user that has `manageContent` permission. There is no signup method, user account
+can only be created by authenticated user that has `manageUser` permission.
 
 ## Endpoints
 
@@ -18,7 +38,7 @@ Base url: https://waifuseum.herokuapp.com
 | `/user/[id]`                   | PUT    | `{ id, username?, password?, ...permissions }` |
 | `/user/[id]`                   | DELETE | `{ id }`                                       |
 
-##### Example:
+#### Example:
 
 -   Get a picture from category **waifu**  
     `GET /museum/waifu`  
