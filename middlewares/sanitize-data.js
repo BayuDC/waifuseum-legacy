@@ -13,7 +13,7 @@ module.exports = () => {
             next();
         },
         async (req, res, next) => {
-            const id = req.params.id ?? req.body.id;
+            let id = req.params.id ?? req.body.id;
             if (!mongoose.isValidObjectId(id)) id = undefined;
 
             const picture = await Picture.findById(id);
