@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(getUser());
 app.use(require('../routes/auth'));
 app.use(require('../routes/user'));
-app.use(require('../routes/main'));
+app.use(require('../routes/museum'));
 app.use(handleError());
 
 app.listen(port, () => console.log('App listening at port', port));
