@@ -1,7 +1,7 @@
 {
   "name": "waifuseum",
-  "version": "1.0.1",
-  "description": "A simple REST API for storing and managing my waifu picture collection",
+  "version": "2.0.0",
+  "description": "A simple REST API for storing and managing anime picture collection",
   "main": "index.js",
   "scripts": {
     "start": "node -r dotenv/config index"
