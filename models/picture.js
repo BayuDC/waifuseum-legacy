@@ -51,12 +51,10 @@ pictureSchema.static('createAndUpload', async function (channel, { pictureFile, 
     await message.edit({ content: picture.id });
 
     return {
-        picture: {
-            _id: picture._id,
-            url: picture.url,
-            sauce: picture.sauce,
-            category: picture.category,
-        },
+        _id: picture._id,
+        url: picture.url,
+        sauce: picture.sauce,
+        category: picture.category,   
     };
 });
 
