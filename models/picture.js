@@ -60,4 +60,34 @@ pictureSchema.static('createAndUpload', async function (channel, { pictureFile, 
     };
 });
 
+pictureSchema.method('update', async function (pictureData) {
+    return await mongoose.model('Picture').findByIdAndUpdate(this.id, pictureData, {
+        new: true,
+        projection: { url: true, sauce: true, category: true },
+    });
+});
+pictureSchema.method('updateFile', async function (message, { pictureFile, sauce }) {
+    await message.removeAttachments();
+    await message.edit({ files: [pictureFile.path] });
+
+    return await this.update({
+        url: message.attachments.first().url,
+        sauce,
+    });
+});
+pictureSchema.method('updateCategory', async function (message, channel, { category, pictureFile, sauce }) {
+    await message.delete();
+    message = await channel.send({
+        content: this.id,
+        files: [pictureFile?.path ?? this.url],
+    });
+
+    return await this.update({
+        url: message.attachments.first().url,
+        sauce,
+        category,
+        messageId: message.id,
+    });
+});
+
 module.exports = mongoose.model('Picture', pictureSchema);

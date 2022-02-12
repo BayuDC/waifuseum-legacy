@@ -8,6 +8,8 @@ router.get('/museum/:category?', museum.sanitize, museum.find);
 // router.get('/museum/pic/v/:id');
 // router.get('/museum/pic/d/:id');
 
-router.post('/museum:category?', uploadImg(), museum.sanitize, museum.create);
+router.post('/museum/:category?', uploadImg(), museum.sanitize, museum.create);
+
+router.put('/museum/:id?', uploadImg(), museum.sanitize, museum.update);
 
 module.exports = router;
