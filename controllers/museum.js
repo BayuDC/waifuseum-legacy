@@ -12,7 +12,7 @@ module.exports.sanitize = [
         next();
     },
     async (req, res, next) => {
-        let id = req.params.id || req.body.id;
+        const id = req.params.id || req.body.id;
 
         if (!id || !isValidObjectId(id)) return next();
 
