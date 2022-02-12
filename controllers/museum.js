@@ -89,3 +89,23 @@ module.exports.update = async (req, res, next) => {
 
     pictureFile?.destroy();
 };
+module.exports.delete = async (req, res, next) => {
+    const picture = req.picture;
+
+    if (!picture) return next(new HttpError(404, 'Picture not found'));
+
+    try {
+        await picture.delete();
+
+        const channel = req.app.waifuseum.get(picture.category);
+        const message = await channel.messages.fetch(picture.messageId);
+
+        await message.delete();
+
+        res.status(204).send();
+    } catch (err) {
+        if (err.name == 'DiscordAPIError' && err.message == 'Unknown Message') return res.status(204).send();
+
+        next(err);
+    }
+};

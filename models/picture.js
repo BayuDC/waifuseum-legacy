@@ -89,5 +89,8 @@ pictureSchema.method('updateCategory', async function (message, channel, { categ
         messageId: message.id,
     });
 });
+pictureSchema.method('delete', async function () {
+    return await mongoose.model('Picture').deleteOne(this);
+});
 
 module.exports = mongoose.model('Picture', pictureSchema);
