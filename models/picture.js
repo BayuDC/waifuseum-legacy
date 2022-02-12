@@ -40,5 +40,24 @@ pictureSchema.static('findRandom', async function (category, count) {
 
     return pictures;
 });
+pictureSchema.static('createAndUpload', async function (channel, { pictureFile, sauce, category }) {
+    const message = await channel.send({ files: [pictureFile.path] });
+    const picture = await this.create({
+        url: message.attachments.first().url,
+        messageId: message.id,
+        category,
+        sauce,
+    });
+    await message.edit({ content: picture.id });
+
+    return {
+        picture: {
+            _id: picture._id,
+            url: picture.url,
+            sauce: picture.sauce,
+            category: picture.category,
+        },
+    };
+});
 
 module.exports = mongoose.model('Picture', pictureSchema);
