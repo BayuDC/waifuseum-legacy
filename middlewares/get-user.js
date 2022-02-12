@@ -10,9 +10,9 @@ module.exports = () => {
             if (!token) throw token;
 
             const payload = jwt.verify(token, secret);
-            res.locals.user = await User.findById(payload.user);
+            req.user = await User.findById(payload.user);
         } catch (err) {
-            res.locals.user = null;
+            req.user = null;
         }
         next();
     };
