@@ -4,7 +4,8 @@
   "description": "A simple REST API for storing and managing anime picture collection",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config index"
+    "start": "node index",
+    "dev": "node -r dotenv/config index"
   },
   "engines": {
     "node": "16.x"
@@ -20,11 +21,13 @@
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "discord.js": "^13.6.0",
-    "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.8",
     "multer": "^1.4.4",
     "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }
