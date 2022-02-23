@@ -1,5 +1,10 @@
 # Waifuseum
 
+![Banner](https://media.discordapp.net/attachments/946013429200723989/946013554472013884/banner.png)
+
+![Version](https://img.shields.io/github/package-json/v/BayuDC/waifuseum?style=for-the-badge&logo=node.js)
+![Deploy Status](https://img.shields.io/github/workflow/status/BayuDC/waifuseum/Deploy?label=Deploy&logo=github%20actions&style=for-the-badge)
+
 Waifuseum (Museum Waifu) is a simple REST API for storing and managing anime picture collection.
 This project use combinaton of ExpressJS, Discord.js, and MongoDB. This uses Discord server as a
 place to store picture file and MongoDB to save the picture url. When we upload a file to discord
