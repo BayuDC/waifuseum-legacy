@@ -13,19 +13,19 @@ database, and yeah **free cloud storage to store picture file**. So, I made this
 automate it. Btw, this project is inspired by [Waifu.pics](https://github.com/Waifu-pics/waifu-api)
 and [Nekos.life](https://github.com/Nekos-life/nekos-dot-life).
 
-### ⚙️ How it works:
+#### ⚙️ How it works
 
 1. User upload the picture file to the API (Express App)
 2. The API send the file to Discord server via discord bot (Discord.js)
 3. The API save the url(obtained from discord bot) to database (MongoDB)
 
-### ⛔ Limitations
+#### ⛔ Limitations
 
 The main drawback of this API is the file size limitation. Due to Discord rules, This API can't
 save files with size more than 8 mb. _Server Boost_ is needed to increase the maximum file size
 limit.
 
-### 🔑 Permissions
+#### 🔑 Permissions
 
 Anyone can get images from this API. But add, update, and delete picture are only available to
 authenticated user that has `manageContent` permission. There is no signup method, user account
@@ -47,7 +47,7 @@ Base url: https://waifuseum.herokuapp.com
 | `/user/[id]`                   | PUT    | `{ id, username?, password?, ...permissions }` |
 | `/user/[id]`                   | DELETE | `{ id }`                                       |
 
-### 📄 Example:
+#### 📄 Example:
 
 -   Get a picture from category **waifu**  
     `GET /museum/waifu`  
