@@ -75,7 +75,6 @@ Base url: https://waifuseum.herokuapp.com
 
 ```
 $ git clone https://github.com/BayuDC/waifuseum.git
-
 ```
 
 #### 🧩 Configuration
@@ -95,7 +94,6 @@ $ nano .env
 $ npm install
 # or using yarn
 $ yarn
-
 ```
 
 #### 🚀 Run
@@ -106,7 +104,6 @@ $ npm run dev
 
 # Using yarn
 $ yarn dev
-
 ```
 
 ## 📜 License
