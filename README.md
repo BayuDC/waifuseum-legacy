@@ -71,4 +71,44 @@ Base url: https://waifuseum.herokuapp.com
 
 ## 🔧 Development
 
-Comming soon...
+#### 📥 Clone this repo
+
+```
+$ git clone https://github.com/BayuDC/waifuseum.git
+
+```
+
+#### 🧩 Configuration
+
+```
+# Go to project directory
+$ cd waifuseum
+
+# Create env file
+$ cp .env.example .env
+
+# Set all required variables
+$ nano .env
+# or using your favorite text editor
+
+# Install dependencies
+$ npm install
+# or using yarn
+$ yarn
+
+```
+
+#### 🚀 Run
+
+```
+# Using npm
+$ npm run dev
+
+# Using yarn
+$ yarn dev
+
+```
+
+## 📜 License
+
+This project is licensed under [MIT](https://github.com/BayuDC/waifuseum/blob/main/LICENSE) License.
