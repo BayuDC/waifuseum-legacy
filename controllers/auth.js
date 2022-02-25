@@ -10,10 +10,10 @@ module.exports.login = async (req, res, next) => {
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
-    if (!user) return next(new HttpError(404, 'User not found'));
+    if (!user) return next(new HttpError(404, { username: 'User not found' }));
 
     const auth = await bcrypt.compare(password, user.password);
-    if (!auth) return next(new HttpError(401, 'Incorrect password!'));
+    if (!auth) return next(new HttpError(401, { password: 'Incorrect password!' }));
 
     const token = jwt.sign({ user: user._id }, secret, { expiresIn: maxAge });
 
