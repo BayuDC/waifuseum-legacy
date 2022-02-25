@@ -24,3 +24,9 @@ module.exports.logout = (req, res, next) => {
     res.clearCookie('token');
     res.sendStatus(204);
 };
+
+module.exports.status = (req, res) => {
+    if (!req.user) return res.status(401).send();
+
+    res.status(200).send();
+};
