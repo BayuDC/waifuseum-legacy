@@ -48,13 +48,13 @@ pictureSchema.static('createAndUpload', async function (channel, { pictureFile, 
         category,
         sauce,
     });
-    await message.edit({ content: picture.id });
+    await message.edit({ content: `\`${picture.id}\`` });
 
     return {
         _id: picture._id,
         url: picture.url,
         sauce: picture.sauce,
-        category: picture.category,   
+        category: picture.category,
     };
 });
 
@@ -76,7 +76,7 @@ pictureSchema.method('updateFile', async function (message, { pictureFile, sauce
 pictureSchema.method('updateCategory', async function (message, channel, { category, pictureFile, sauce }) {
     await message.delete();
     message = await channel.send({
-        content: this.id,
+        content: `\`${this.id}\``,
         files: [pictureFile?.path ?? this.url],
     });
 

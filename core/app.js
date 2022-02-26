@@ -1,11 +1,13 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const handleError = require('../middlewares/handle-error');
 const getUser = require('../middlewares/get-user');
 
 const app = express();
 const port = process.env.PORT ?? 8080;
 
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
