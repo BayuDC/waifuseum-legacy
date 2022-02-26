@@ -41,6 +41,7 @@ Base url: https://waifuseum.herokuapp.com
 | `/museum/[category]`           | POST   | `{ category, picture, sauce? }`                |
 | `/museum/[id]`                 | PUT    | `{ id, category?, picture?, sauce? }`          |
 | `/museum/[id]`                 | DELETE | `{ id }`                                       |
+| `/auth`                        | GET    | `{ }`                                          |
 | `/auth/login`                  | POST   | `{ username, password }`                       |
 | `/auth/logout`                 | DELETE | `{ }`                                          |
 | `/user`                        | POST   | `{ username, password, ...permissions }`       |
