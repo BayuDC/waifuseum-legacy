@@ -21,3 +21,4 @@ jobs:
           HD_BOT_TOKEN: ${{secrets.BOT_TOKEN}}
           HD_BOT_PREFIX: ${{secrets.BOT_PREFIX}}
           HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
+          HD_CORS_ORIGIN: http://localhost:3000
