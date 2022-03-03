@@ -15,7 +15,14 @@ module.exports.login = async (req, res, next) => {
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) return next(new HttpError(401, { password: 'Incorrect password!' }));
 
-    const token = jwt.sign({ user: user._id }, secret, { expiresIn: maxAge });
+    const payload = {
+        user: {
+            username: user.username,
+            manageUser: user.manageUser,
+            manageContent: user.manageContent,
+        },
+    };
+    const token = jwt.sign(payload, secret, { expiresIn: maxAge });
 
     res.cookie('token', token, { httpOnly: true, maxAge: maxAge * 1000, secure: true });
     res.status(201).send();
@@ -28,5 +35,5 @@ module.exports.logout = (req, res, next) => {
 module.exports.status = (req, res) => {
     if (!req.user) return res.status(401).send();
 
-    res.status(200).send();
+    res.json({ user: req.user });
 };

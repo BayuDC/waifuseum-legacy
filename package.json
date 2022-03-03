@@ -1,6 +1,6 @@
 {
   "name": "waifuseum",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A simple REST API for storing and managing anime picture collection",
   "main": "index.js",
   "scripts": {

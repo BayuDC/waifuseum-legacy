@@ -10,7 +10,7 @@ module.exports = () => {
             if (!token) throw token;
 
             const payload = jwt.verify(token, secret);
-            req.user = await User.findById(payload.user);
+            req.user = payload.user;
         } catch (err) {
             req.user = null;
         }
