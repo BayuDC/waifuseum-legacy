@@ -17,6 +17,7 @@ app.use(require('../routes/auth'));
 app.use(require('../routes/user'));
 app.use(require('../routes/museum'));
 app.use(handleError());
+
 app.get('/', (req, res) => res.send());
 
 app.listen(port, () => console.log('App listening at port', port));
