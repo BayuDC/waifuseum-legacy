@@ -3,7 +3,6 @@
 ![Banner](https://media.discordapp.net/attachments/946013429200723989/946013554472013884/banner.png)
 
 ![Version](https://img.shields.io/github/package-json/v/BayuDC/waifuseum?style=for-the-badge&logo=node.js)
-![Deploy Status](https://img.shields.io/github/workflow/status/BayuDC/waifuseum/Deploy?label=Deploy&logo=github%20actions&style=for-the-badge)
 ![Web Status](https://img.shields.io/website.svg?url=https%3A%2F%2Fwaifuseum.herokuapp.com&style=for-the-badge&label=Web)
 
 Waifuseum (Museum Waifu) is a simple REST API for storing and managing anime picture collection.
