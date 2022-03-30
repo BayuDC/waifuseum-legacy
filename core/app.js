@@ -5,7 +5,7 @@ const handleError = require('../middlewares/handle-error');
 const getUser = require('../middlewares/get-user');
 
 const app = express();
-const port = process.env.PORT ?? 8080;
+const port = process.env.PORT ?? 8000;
 
 app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
 app.use(express.json());

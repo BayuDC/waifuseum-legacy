@@ -24,7 +24,7 @@ module.exports.login = async (req, res, next) => {
     };
     const token = jwt.sign(payload, secret, { expiresIn: maxAge });
 
-    res.cookie('token', token, { httpOnly: true, maxAge: maxAge * 1000, domain: 'waifuseum.my.id' });
+    res.cookie('token', token, { maxAge: maxAge * 1000, domain: 'shryk.dev' });
     res.status(201).send();
 };
 module.exports.logout = (req, res, next) => {
