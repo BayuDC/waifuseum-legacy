@@ -1,9 +1,13 @@
+const User = require('../models/user');
 const Category = require('../models/category');
 
 module.exports = {
     name: 'delete',
     async execute(message, name) {
-        if (!name) return await message.channel.send("**I'm a teapot**");
+        if (!name) return await message.channel.send('Category name is required');
+        if (!(await User.exists({ discordId: message.author.id, manageContent: true }))) {
+            return await message.channel.send('Unauthorized');
+        }
 
         const category = await Category.findOne({ name });
         const childCategories = await Category.find({ parent: name });

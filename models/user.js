@@ -9,6 +9,10 @@ const userSchema = mongoose.Schema({
     password: String,
     manageUser: Boolean,
     manageContent: Boolean,
+    discordId: {
+        type: String,
+        unique: true,
+    },
 });
 userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
