@@ -1,7 +1,7 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Category = require('../models/category');
 
-const prefix = process.env.BOT_PREFIX ?? '!';
+const prefix = '!';
 const token = process.env.BOT_TOKEN;
 
 const client = new Client({

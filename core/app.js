@@ -7,7 +7,7 @@ const getUser = require('../middlewares/get-user');
 const app = express();
 const port = process.env.PORT ?? 8000;
 
-app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN }));
+app.use(cors({ credentials: true, origin: process.env.ALLOWED_ORIGIN }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
