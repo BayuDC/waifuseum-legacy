@@ -11,10 +11,11 @@ const toBool = value => {
 
 module.exports.sanitize = (req, res, next) => {
     const id = req.params.id || req.body.id;
-    const { manageUser, manageContent } = req.body;
+    const { manageUser, manageContent, manageServer } = req.body;
 
     req.body.manageUser = toBool(manageUser);
     req.body.manageContent = toBool(manageContent);
+    req.body.manageServer = toBool(manageServer);
     if (isValidObjectId(id)) {
         req.userId = id;
     }
@@ -37,6 +38,7 @@ module.exports.create = async (req, res, next) => {
             username: user.username,
             manageUser: user.manageUser,
             manageContent: user.manageContent,
+            manageServer: user.manageServer,
         },
     });
 };
@@ -55,6 +57,7 @@ module.exports.update = async (req, res, next) => {
             username: user.username,
             manageUser: user.manageUser,
             manageContent: user.manageContent,
+            manageServer: user.manageServer,
         },
     });
 };

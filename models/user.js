@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
     },
     password: String,
     manageUser: Boolean,
+    manageServer: Boolean,
     manageContent: Boolean,
     discordId: {
         type: String,
