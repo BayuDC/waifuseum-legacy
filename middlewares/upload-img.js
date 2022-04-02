@@ -3,7 +3,7 @@ const { randomBytes } = require('crypto');
 const { isWebUri } = require('valid-url');
 const multer = require('multer');
 const axios = require('axios').default;
-const HttpError = require('../lib/http-error');
+const HttpError = require('../class/http-error');
 
 const imgSize = 8 * 1024 * 1024;
 const imgFormats = { 'image/jpeg': 'jpg', 'image/png': 'png' };

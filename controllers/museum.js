@@ -1,6 +1,6 @@
 const { isValidObjectId } = require('mongoose');
 const Picture = require('../models/picture');
-const HttpError = require('../lib/http-error');
+const HttpError = require('../class/http-error');
 
 module.exports.sanitize = [
     (req, res, next) => {

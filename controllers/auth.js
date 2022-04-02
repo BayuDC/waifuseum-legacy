@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const HttpError = require('../lib/http-error');
+const HttpError = require('../class/http-error');
 
 const secret = process.env.JWT_SECRET;
 const maxAge = 24 * 60 * 60;

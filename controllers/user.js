@@ -1,6 +1,6 @@
 const { isValidObjectId } = require('mongoose');
 const User = require('../models/user');
-const HttpError = require('../lib/http-error');
+const HttpError = require('../class/http-error');
 
 const toBool = value => {
     if (value == 'true') return true;
