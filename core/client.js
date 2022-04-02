@@ -1,7 +1,7 @@
 const { Client, Collection, Intents } = require('discord.js');
 const Category = require('../models/category');
+const Config = require('../models/config');
 
-const prefix = '!';
 const token = process.env.BOT_TOKEN;
 
 const client = new Client({
@@ -9,6 +9,7 @@ const client = new Client({
 });
 
 client.waifuseum = new Collection();
+client.prefixes = new Collection();
 client.commands = new Collection();
 ['id', 'ping', 'create', 'delete', 'config'].forEach(file => {
     const command = require(`../commands/${file}`);
@@ -16,11 +17,13 @@ client.commands = new Collection();
 });
 
 client.on('messageCreate', async message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (message.author.bot) return;
+
+    const prefix = client.prefixes.get(message.guildId) || '!';
+    if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
-
     if (!client.commands.has(command)) return;
 
     try {
@@ -33,6 +36,9 @@ client.on('messageCreate', async message => {
 
 client.once('ready', async () => {
     console.log('Bot is ready');
+    (await Config.find()).forEach(config => {
+        client.prefixes.set(config.serverId, config.prefix);
+    });
     (await Category.find()).forEach(async category => {
         client.waifuseum.set(category.name, await client.channels.fetch(category.channelId));
     });
