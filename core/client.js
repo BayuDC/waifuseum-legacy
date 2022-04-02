@@ -5,7 +5,7 @@ const Config = require('../models/config');
 const token = process.env.BOT_TOKEN;
 
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS],
 });
 
 client.waifuseum = new Collection();
@@ -32,6 +32,12 @@ client.on('messageCreate', async message => {
         await message.channel.send('Something went wrong');
         console.log(error);
     }
+});
+client.on('guildMemberAdd', async member => {
+    const roleId = client.configs.get(member.guild.id)?.defaultRoleId;
+    if (!roleId) return;
+
+    await member.roles.add(roleId);
 });
 
 client.once('ready', async () => {
