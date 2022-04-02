@@ -13,7 +13,8 @@ module.exports = {
                         .addFields(
                             { name: 'Server Id', value: `\`${message.guild.id}\`` },
                             { name: 'Channel Id', value: `\`${message.channel.id}\`` },
-                            { name: 'User Id', value: `\`${message.author.id}\`` }
+                            { name: 'Channel Parent Id', value: `\`${message.channel.parent?.id || '-'}\`` },
+                            { name: 'Your User Id', value: `\`${message.author.id}\`` }
                         ),
                 ],
             });
