@@ -7,6 +7,8 @@ const configSchema = new mongoose.Schema(
             unique: true,
         },
         prefix: String,
+        adminRoleId: String,
+        defaultRoleId: String,
     },
     { versionKey: false }
 );
