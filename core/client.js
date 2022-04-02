@@ -9,7 +9,7 @@ const client = new Client({
 });
 
 client.waifuseum = new Collection();
-client.prefixes = new Collection();
+client.configs = new Collection();
 client.commands = new Collection();
 ['id', 'ping', 'create', 'delete', 'config'].forEach(file => {
     const command = require(`../commands/${file}`);
@@ -19,7 +19,7 @@ client.commands = new Collection();
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
 
-    const prefix = client.prefixes.get(message.guildId) || '!';
+    const prefix = client.configs.get(message.guildId)?.prefix || '!';
     if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -37,7 +37,7 @@ client.on('messageCreate', async message => {
 client.once('ready', async () => {
     console.log('Bot is ready');
     (await Config.find()).forEach(config => {
-        client.prefixes.set(config.serverId, config.prefix);
+        client.configs.set(config.serverId, config.toObject());
     });
     (await Category.find()).forEach(async category => {
         client.waifuseum.set(category.name, await client.channels.fetch(category.channelId));
