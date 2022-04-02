@@ -10,8 +10,8 @@ const client = new Client({
 
 client.waifuseum = new Collection();
 client.commands = new Collection();
-['id', 'ping', 'create', 'delete'].forEach(file => {
-    const command = require(`../commands/${file}.js`);
+['id', 'ping', 'create', 'delete', 'config'].forEach(file => {
+    const command = require(`../commands/${file}`);
     client.commands.set(command.name, command);
 });
 
