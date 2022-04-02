@@ -22,8 +22,14 @@ module.exports = {
                         title: message.guild.name + "'s Configuration",
                         fields: [
                             { name: 'My Prefix', value: config.prefix || 'not set' },
-                            { name: 'Admin Role', value: config.adminRoleId || 'not set' },
-                            { name: 'Default Role', value: config.defaultRoleId || 'not set' },
+                            {
+                                name: 'Admin Role',
+                                value: config.adminRoleId ? `<@&${config.adminRoleId}> - \`${config.adminRoleId}\`` : 'not set',
+                            },
+                            {
+                                name: 'Default Role',
+                                value: config.defaultRoleId ? `<@&${config.defaultRoleId}> - \`${config.defaultRoleId}\`` : 'not set',
+                            },
                         ],
                     }),
                 ],
