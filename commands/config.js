@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const Config = require('../models/config');
+const User = require('../models/user');
 
 module.exports = {
     name: 'config',
@@ -27,6 +28,10 @@ module.exports = {
                     }),
                 ],
             });
+
+        if (!(await User.exists({ discordId: message.author.id, manageServer: true }))) {
+            return await message.channel.send('Unauthorized');
+        }
 
         const configDoc = {};
 
