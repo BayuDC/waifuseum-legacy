@@ -9,6 +9,8 @@ const configSchema = new mongoose.Schema(
         prefix: String,
         adminRoleId: String,
         defaultRoleId: String,
+        museumParentId: String,
+        uploadGatewayId: String,
     },
     { versionKey: false }
 );

@@ -30,6 +30,14 @@ module.exports = {
                                 name: 'Default Role',
                                 value: config.defaultRoleId ? `<@&${config.defaultRoleId}> - \`${config.defaultRoleId}\`` : 'not set',
                             },
+                            {
+                                name: 'Museum Parent Channel',
+                                value: config.museumParentId ? `<#${config.museumParentId}> - \`${config.museumParentId}\`` : 'not set',
+                            },
+                            {
+                                name: 'Upload Gateway Channal',
+                                value: config.uploadGatewayId ? `<#${config.uploadGatewayId}> - \`${config.uploadGatewayId}\`` : 'not set',
+                            },
                         ],
                     }),
                 ],
@@ -44,6 +52,8 @@ module.exports = {
         if (key == 'prefix') configDoc['prefix'] = value;
         if (key == 'admin-role') configDoc['adminRoleId'] = message.mentions.roles.first()?.id || value;
         if (key == 'default-role') configDoc['defaultRoleId'] = message.mentions.roles.first()?.id || value;
+        if (key == 'museum-parent') configDoc['museumParentId'] = value;
+        if (key == 'upload-gateway') configDoc['uploadGatewayId'] = message.mentions.channels.first()?.id || value;
 
         await Config.findByIdAndUpdate(config._id, configDoc);
         await message.channel.send('Configuration saved');
