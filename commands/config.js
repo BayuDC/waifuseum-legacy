@@ -74,6 +74,6 @@ module.exports = {
             return await message.channel.send('Unauthorized');
         }
 
-        await configCommands.get(command).execute(message, ...args);
+        await configCommands.get(command).execute(message, config, ...args);
     },
 };
