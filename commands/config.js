@@ -1,20 +1,26 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, Collection } = require('discord.js');
 const Config = require('../models/config');
 const User = require('../models/user');
+
+const configCommands = new Collection();
+['set', 'load', 'clear'].forEach(file => {
+    const command = require(`./config/${file}.cjs`);
+    configCommands.set(command.name, command);
+});
 
 module.exports = {
     name: 'config',
     /**
      * @param {import('discord.js').Message} message
-     * @param {string} key
-     * @param {string} value
+     * @param {string} command
+     * @param {Array} args
      */
-    async execute(message, key, value) {
+    async execute(message, command, ...args) {
         const config = await Config.findOneOrCreate({
             serverId: message.guildId,
         });
 
-        if (!key || !value)
+        if (!command) {
             return await message.channel.send({
                 embeds: [
                     new MessageEmbed({
@@ -42,20 +48,32 @@ module.exports = {
                     }),
                 ],
             });
+        }
+
+        if (!configCommands.has(command)) {
+            return await message.channel.send({
+                embeds: [
+                    new MessageEmbed({
+                        color: '0099ff',
+                        title: 'All Configuration Commands',
+                        fields: [
+                            { name: 'config', value: 'Show all configuration values' },
+                            ...[
+                                configCommands.map(command => ({
+                                    name: 'config ' + command.name,
+                                    value: command.desc,
+                                })),
+                            ],
+                        ],
+                    }),
+                ],
+            });
+        }
 
         if (!(await User.exists({ discordId: message.author.id, manageServer: true }))) {
             return await message.channel.send('Unauthorized');
         }
 
-        const configDoc = {};
-
-        if (key == 'prefix') configDoc['prefix'] = value;
-        if (key == 'admin-role') configDoc['adminRoleId'] = message.mentions.roles.first()?.id || value;
-        if (key == 'default-role') configDoc['defaultRoleId'] = message.mentions.roles.first()?.id || value;
-        if (key == 'museum-parent') configDoc['museumParentId'] = value;
-        if (key == 'upload-gateway') configDoc['uploadGatewayId'] = message.mentions.channels.first()?.id || value;
-
-        await Config.findByIdAndUpdate(config._id, configDoc);
-        await message.channel.send('Configuration saved');
+        await configCommands.get(command).execute(message, ...args);
     },
 };
