@@ -28,8 +28,15 @@ module.exports = {
             }
         }
 
+        const config = message.client.configs.get(message.guildId);
+        const parentChannel = message.guild.channels.cache.get(config?.museumParentId);
+        if (!parentChannel)
+            return await message.channel.send(
+                `Please set the museum parent channel first! \`\`\`${config.prefix}config museum-parent [channelId]\`\`\``
+            );
+
         const channel = await message.guild.channels.create(name);
-        await channel.setParent(message.channel.parent);
+        await channel.setParent(parentChannel);
 
         await Category.create({ name, channelId: channel.id, parent: parentName });
         message.client.waifuseum.set(name, channel);
